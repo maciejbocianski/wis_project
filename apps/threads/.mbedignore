@@ -1,0 +1,3 @@
+mbed-os/connectivity/lorawan/*
+mbed-os/connectivity/nanostack/*
+proto/tests/*

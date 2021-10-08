@@ -1,0 +1,10 @@
+{
+    "DISCO_L475VG_IOT01A_WIS": {
+        "inherits"                          : ["DISCO_L475VG_IOT01A"],
+        "device_has_remove": [
+            "I2C_ASYNCH",
+            "I2CSLAVE",
+            "SPI_ASYNCH"
+        ]
+    }
+}

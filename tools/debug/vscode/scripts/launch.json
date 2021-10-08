@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug with pyOCD (mbed-cli debug build)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/BUILD/DISCO_L475VG_IOT01A/GCC_ARM-DEBUG/${workspaceRootFolderName}.elf",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "debugServerArgs": "",
+            "serverLaunchTimeout": 20000,
+            "filterStderr": true,
+            "filterStdout": false,
+            "serverStarted": "GDB\\ server\\ started",
+            "preLaunchTask": "Build mbed-cli debug"
+            "setupCommands": [
+                { "text": "-target-select remote localhost:3333", "description": "connect to target", "ignoreFailures": false },
+                { "text": "-file-exec-and-symbols ${workspaceRoot}/BUILD/DISCO_L475VG_IOT01A/GCC_ARM-DEBUG/${workspaceRootFolderName}.elf", "description": "load file", "ignoreFailures": false},
+                { "text": "-interpreter-exec console \"monitor endian little\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor reset\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor halt\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor arm semihosting enable\"", "ignoreFailures": false },
+                { "text": "-target-download", "description": "flash target", "ignoreFailures": false }
+            ],
+            "logging": {
+                "moduleLoad": true,
+                "trace": true,
+                "engineLogging": true,
+                "programOutput": true,
+                "exceptions": true
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "MIDebuggerPath": "/home/maciej/tools/gcc-arm-none-eabi-9-2019-q4-major/bin/arm-none-eabi-gdb",
+                "debugServerPath": "/home/maciej/ws/py_env/bin/pyocd",
+                "debugServerArgs": "gdbserver -f 4000000 -t stm32l475xg -O connect_mode=under-reset -v",
+            },
+            "osx": {
+                "MIMode": "gdb",
+                "MIDebuggerPath": "arm-none-eabi-gdb",
+                "debugServerPath": "pyocd-gdbserver"
+            },
+            "windows": {
+                "preLaunchTask": "make.exe",
+                "MIMode": "gdb",
+                "MIDebuggerPath": "arm-none-eabi-gdb.exe",
+                "debugServerPath": "pyocd-gdbserver.exe",
+                "setupCommands": [
+                    { "text": "-environment-cd ${workspaceRoot}\\BUILD" },
+                    { "text": "-target-select remote localhost:3333", "description": "connect to target", "ignoreFailures": false },
+                    { "text": "-file-exec-and-symbols ${workspaceRootFolderName}.elf", "description": "load file", "ignoreFailures": false},
+                    { "text": "-interpreter-exec console \"monitor endian little\"", "ignoreFailures": false },
+                    { "text": "-interpreter-exec console \"monitor reset\"", "ignoreFailures": false },
+                    { "text": "-interpreter-exec console \"monitor halt\"", "ignoreFailures": false },
+                    { "text": "-interpreter-exec console \"monitor arm semihosting enable\"", "ignoreFailures": false },
+                    { "text": "-target-download", "description": "flash target", "ignoreFailures": false }
+                ]
+            }
+        }
+    ]
+}
